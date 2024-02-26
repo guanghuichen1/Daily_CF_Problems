@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class E1547 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int n=sc.nextInt();
+            int k=sc.nextInt();
+            int[]air_con=new int[k];
+            int[]temprature=new int[k];
+            for (int j = 0; j < k; j++) {
+                air_con[j]=sc.nextInt();
+            }
+            for (int j = 0; j < k; j++) {
+                temprature[j]=sc.nextInt();
+            }
+            solve(n,k,air_con,temprature);
+        }
+        sc.close();
+    }
+    public static void solve(int n, int k, int[]air_con,int[]temprature){
+        int[]room=new int[n];
+        for (int i = 0; i < n; i++) {
+            room[i]=Integer.MAX_VALUE-1;
+        }
+        for (int i = 0; i < k; i++) {
+            room[air_con[i]]=temprature[i];
+        }
+        for (int i = 1; i < n; i++) {
+            room[i]=Math.min(room[i], room[i-1]+1);
+        }
+        for (int i = n-2; i >=0; i--) {
+            room[i]=Math.min(room[i+1]+1, room[i]);
+        }
+        for (int val : room) {
+            System.out.print(val+" ");
+        }
+        System.out.println();
+    }
+}
