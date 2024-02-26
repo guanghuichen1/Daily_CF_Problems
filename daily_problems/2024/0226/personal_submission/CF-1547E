@@ -1,0 +1,44 @@
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class E1547 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        for (int t = 0; t < q; t++) {
+            StringBuilder sb=new StringBuilder();
+            int n=sc.nextInt();
+            int k=sc.nextInt();
+            int[]air_con=new int[k];
+            int[]temprature=new int[k];
+            for (int j = 0; j < k; j++) {
+                air_con[j]=sc.nextInt()-1;
+            }
+            for (int j = 0; j < k; j++) {
+                temprature[j]=sc.nextInt();
+            }
+            long []room=new long[n];
+            Arrays.fill(room, Integer.MAX_VALUE-1);
+            for (int i = 0; i < k; i++) {
+                room[air_con[i]]=temprature[i];
+            }
+            for (int i = 1; i <n; i++) {
+                room[i]=Math.min(room[i-1]+1, room[i]);
+            }
+            for (int i = n-2; i>=0; i--) {
+                room[i]=Math.min(room[i+1]+1, room[i]);
+            }
+            for (int i = 0; i < room.length; i++) {
+                sb.append(room[i]).append(" ");
+            }
+            System.out.println(sb);
+
+        }
+        sc.close();
+    }
+   
+}
+
+
+```
